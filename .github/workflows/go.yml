@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Tidy Go modules
-        run: go mod tidy
+        run: go mod tidy -go=1.17
         
       - name: Build linux-x64
         run: CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o artifacts/docker-natcloud-linux-x64
