@@ -95,7 +95,7 @@ func DeleteDocker(ctx *gin.Context) {
 			} else {
 				err = cli.ContainerRemove(ctx, info.ID, types.ContainerRemoveOptions{})
 				if err != nil {
-					appG.Response(200, err.Error(), "")
+					appG.Response(0, err.Error(), "")
 					return
 				} else {
 					appG.Response(200, "删除容器成功", "")
@@ -123,7 +123,7 @@ func PauseDocker(ctx *gin.Context) { //暂停容器的所有进程
 			} else {
 				err = cli.ContainerPause(ctx, info.ID)
 				if err != nil {
-					appG.Response(200, err.Error(), "")
+					appG.Response(0, err.Error(), "")
 					return
 				} else {
 					appG.Response(200, "冻结进程成功", "")
@@ -151,7 +151,7 @@ func UnPauseDocker(ctx *gin.Context) { //恢复暂停容器的所有进程
 			} else {
 				err = cli.ContainerUnpause(ctx, info.ID)
 				if err != nil {
-					appG.Response(200, err.Error(), "")
+					appG.Response(0, err.Error(), "")
 					return
 				} else {
 					appG.Response(200, "恢复冻结进程成功", "")
@@ -179,7 +179,7 @@ func StartDocker(ctx *gin.Context) {
 			} else {
 				err = cli.ContainerStart(ctx, info.ID, types.ContainerStartOptions{})
 				if err != nil {
-					appG.Response(200, err.Error(), "")
+					appG.Response(0, err.Error(), "")
 					return
 				} else {
 					appG.Response(200, "启动容器成功", "")
@@ -207,7 +207,7 @@ func StopDocker(ctx *gin.Context) { //恢复暂停容器的所有进程
 			} else {
 				err = cli.ContainerStop(ctx, info.ID, nil)
 				if err != nil {
-					appG.Response(200, err.Error(), "")
+					appG.Response(0, err.Error(), "")
 					return
 				} else {
 					appG.Response(200, "停止容器成功", "")
@@ -235,10 +235,10 @@ func RestarDocker(ctx *gin.Context) {
 			} else {
 				err = cli.ContainerRestart(ctx, info.ID, nil)
 				if err != nil {
-					appG.Response(200, err.Error(), "")
+					appG.Response(0, err.Error(), "")
 					return
 				} else {
-					appG.Response(200, "停止容器成功", "")
+					appG.Response(200, "重启容器成功", "")
 					return
 				}
 			}
@@ -276,7 +276,7 @@ func AddPort(ctx *gin.Context) { //恢复暂停容器的所有进程
 							appG.Response(0, "添加端口失败", "")
 							return
 						} else {
-							appG.Response(0, "添加端口成功", "")
+							appG.Response(200, "添加端口成功", "")
 							cmd := exec.Command("/bin/bash", "-c", "service iptables save && service iptables restart")
 							cmd.Run()
 							return
@@ -316,7 +316,7 @@ func DelPort(ctx *gin.Context) { //恢复暂停容器的所有进程
 					appG.Response(0, "删除端口失败", "")
 					return
 				} else {
-					appG.Response(0, "删除端口成功", "")
+					appG.Response(200, "删除端口成功", "")
 					userdatabase.DeleteUserProt(id, porto)
 					cmd := exec.Command("/bin/bash", "-c", "service iptables save && service iptables restart")
 					cmd.Run()
@@ -357,7 +357,7 @@ func AddDomain(ctx *gin.Context) { //恢复暂停容器的所有进程
 							return
 						}
 					*/
-					appG.Response(0, "添加域名成功", "")
+					appG.Response(200, "添加域名成功", "")
 					return
 				} else {
 					appG.Response(0, "添加域名失败", "")
@@ -399,7 +399,7 @@ func DelDomain(ctx *gin.Context) { //恢复暂停容器的所有进程
 						return
 					}
 				*/
-				appG.Response(0, "删除域名成功", "")
+				appG.Response(200, "删除域名成功", "")
 				return
 			}
 		}
