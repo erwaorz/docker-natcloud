@@ -1,0 +1,36 @@
+[
+ {
+  "id": "abc",
+  "portnums": 10,
+  "domainnums": 0,
+  "ports": [
+   {
+    "porto": "23",
+    "port": "23"
+   },
+   {
+    "porto": "24",
+    "port": "24"
+   }
+  ],
+  "domains": [],
+  "ip": "10.0.0.3"
+ },
+ {
+  "id": "abcd",
+  "portnums": 10,
+  "domainnums": 0,
+  "ports": [
+   {
+    "porto": "24",
+    "port": "23"
+   },
+   {
+    "porto": "25",
+    "port": "24"
+   }
+  ],
+  "domains": [],
+  "ip": "10.0.0.3"
+ }
+]
