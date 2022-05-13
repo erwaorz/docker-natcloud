@@ -6,7 +6,7 @@ This a  simple Docker REST API that providing a friendly API to manage Docker co
 1.下载安装最新 Go 环境  
 2.clone 并进入本项目，下载所需包
 ```bash
-git clone --depth=1 https://github.com/erwaorz/docker-natcloudd.git  
+git clone --depth=1 https://github.com/erwaorz/docker-natcloud.git  
 cd docker-natcloud  
 go version  
 go env -w GOPROXY=https://goproxy.cn,direct  
