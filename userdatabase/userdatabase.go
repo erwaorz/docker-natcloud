@@ -72,6 +72,29 @@ func Create(id, natip string, portnums, domainnums int) { //保存容器ID和转
 	}
 	ioutil.WriteFile("./user.json", out, 0775)
 }
+func DeleteUser(id string) bool {
+	p1 := &User{
+		Id: id,
+	}
+	data, err := ioutil.ReadFile("./user.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fields := make([]User, 0)
+	err = json.Unmarshal(data, &fields)
+	if err != nil {
+		log.Fatal(err)
+	}
+	var p2 []User
+	for _, v := range fields {
+		if v.Id != p1.Id {
+			p2 = append(p2, v)
+		}
+	}
+	out, err := json.MarshalIndent(p2, "", " ")
+	_ = ioutil.WriteFile("./user.json", out, 0755)
+	return true
+}
 func SearchUser(id string) *User { //取特定用戶信息
 	product := &User{}
 	p1 := &User{

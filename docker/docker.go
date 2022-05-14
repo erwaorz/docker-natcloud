@@ -98,6 +98,7 @@ func DeleteDocker(ctx *gin.Context) {
 					appG.Response(0, err.Error(), "")
 					return
 				} else {
+					userdatabase.DeleteUser(id)
 					appG.Response(200, "删除容器成功", "")
 					return
 				}
