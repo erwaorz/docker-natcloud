@@ -95,71 +95,22 @@ func DeleteUser(id string) bool {
 	_ = ioutil.WriteFile("./user.json", out, 0755)
 	return true
 }
-func SearchUser(id string) *User { //取特定用戶信息
-	product := &User{}
-	p1 := &User{
-		Id: id,
-	}
-	//反射转为map
-	tp := reflect.TypeOf(p1).Elem()
-	vp := reflect.ValueOf(p1).Elem()
-	field := make(map[string]interface{}, 0)
-	for i := 0; i < tp.NumField(); i++ {
-		field1 := tp.Field(i)
-		field2 := vp.Field(i)
-		key := field1.Tag.Get("json")
-		switch field2.Kind() {
-		case reflect.Int:
-			field[key] = float64(field2.Interface().(int))
-		case reflect.Int8:
-			field[key] = float64(field2.Interface().(int8))
-		case reflect.Int16:
-			field[key] = float64(field2.Interface().(int16))
-		case reflect.Int32:
-			field[key] = float64(field2.Interface().(int32))
-		case reflect.Int64:
-			field[key] = float64(field2.Interface().(int64))
-		case reflect.Uint:
-			field[key] = float64(field2.Interface().(uint))
-		case reflect.Uint8:
-			field[key] = float64(field2.Interface().(uint8))
-		case reflect.Uint16:
-			field[key] = float64(field2.Interface().(uint16))
-		case reflect.Uint32:
-			field[key] = float64(field2.Interface().(uint32))
-		case reflect.Uint64:
-			field[key] = float64(field2.Interface().(uint64))
-		case reflect.Float32:
-			field[key] = float64(field2.Interface().(float32))
-		case reflect.Float64:
-			field[key] = field2.Interface()
-		default:
-			field[key] = field2.Interface()
-		}
-	}
-	_, err := json.Marshal(p1)
-	if err != nil {
-		log.Fatal(err)
-	}
+func SearchUser(id string) User { //取特定用戶信息
 	data, err := ioutil.ReadFile("./user.json")
 	if err != nil {
 		log.Fatal(err)
 	}
-	fields := make([]map[string]interface{}, 0)
+	fields := make([]User, 0)
 	err = json.Unmarshal(data, &fields)
 	if err != nil {
 		log.Fatal(err)
 	}
-	for _, item := range fields {
-		if item["user"] == field["user"] {
-			field = item
-			goto over
+	for _, v := range fields {
+		if v.Id == id {
+			return v
 		}
 	}
-over:
-	out, _ := json.Marshal(field)
-	json.Unmarshal(out, &product)
-	return product
+	return User{}
 }
 func UpdateUserPortnums(id string, nums int) {
 	p1 := &User{
