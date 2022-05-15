@@ -246,7 +246,7 @@ func RestarDocker(ctx *gin.Context) {
 		}
 	}
 }
-func AddPort(ctx *gin.Context) { //恢复暂停容器的所有进程
+func AddPort(ctx *gin.Context) { //添加端口
 	appG := app.Gin{C: ctx}
 	id := ctx.PostForm("id")
 	porto := ctx.PostForm("porto")
@@ -291,7 +291,7 @@ func AddPort(ctx *gin.Context) { //恢复暂停容器的所有进程
 		}
 	}
 }
-func DelPort(ctx *gin.Context) { //恢复暂停容器的所有进程
+func DelPort(ctx *gin.Context) { //删除端口
 	appG := app.Gin{C: ctx}
 	id := ctx.PostForm("id")
 	porto := ctx.PostForm("porto")
@@ -327,7 +327,7 @@ func DelPort(ctx *gin.Context) { //恢复暂停容器的所有进程
 		}
 	}
 }
-func AddDomain(ctx *gin.Context) { //恢复暂停容器的所有进程
+func AddDomain(ctx *gin.Context) { //添加域名
 	appG := app.Gin{C: ctx}
 	id := ctx.PostForm("id")
 	domain := ctx.PostForm("domain")
@@ -368,7 +368,7 @@ func AddDomain(ctx *gin.Context) { //恢复暂停容器的所有进程
 		}
 	}
 }
-func DelDomain(ctx *gin.Context) { //恢复暂停容器的所有进程
+func DelDomain(ctx *gin.Context) { //删除
 	appG := app.Gin{C: ctx}
 	id := ctx.PostForm("id")
 	//domain := ctx.PostForm("domain")

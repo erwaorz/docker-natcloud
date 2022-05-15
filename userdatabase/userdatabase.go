@@ -428,8 +428,10 @@ func Okip(ip_prefix string) string { //返回一个可用的ip
 		if len(fields) == 0 {
 			return ip_prefix + "." + strconv.Itoa(i)
 		}
-		for fieldslen, v := range fields {
-			if ip_prefix+"."+strconv.Itoa(i) != v.Ip && fieldslen+1 == len(fields) {
+		for ii, v := range fields {
+			if ip_prefix+"."+strconv.Itoa(i) == v.Ip {
+				break
+			} else if ii+1 == len(fields) {
 				return ip_prefix + "." + strconv.Itoa(i)
 			}
 		}
